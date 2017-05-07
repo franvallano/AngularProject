@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12 offset-md-3">
+    <div class="form-inline">
+      <input class="form-control" type="text" placeholder="Location Name" #place (keyup.enter)="search(place.value, language.value); place.value=''; language.value=''">
+      <input style="margin-left: 0.75em;" class="form-control" type="text" placeholder="Language e.g. Java" #language (keyup.enter)="search(place.value, language.value); place.value=''; language.value=''">
+      <button style="margin-left: 0.75em;" (click)="search(place.value, language.value); place.value=''; language.value=''" type="button" class="btn btn-outline-primary">Search</button>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<div class="row">
+  <div *ngIf="error_text" class="alert alert-danger" role="alert">
+    <strong>{{error_text}}</strong>
+  </div>
+  <div class="card-columns">
+    <div *ngFor="let user of results">
+      <div class="card col-md-12">
+        <img style="width: 20rem;" class="card-img-top" src="{{user.avatar_url}}" alt="Profile image">
+        <div class="card-block">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <h4 class="card-title">{{user.login}}</h4><br>
+              <button class="btn btn-primary" data-toggle="modal" (click)="getDetails(user.login)" data-target=".bd-example-modal-lg">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="box text-center">
+          <img src="{{selectedUser?.avatar_url}}" class="img-responsive img-circle">
+          <div class="details">
+            <div *ngIf="selectedUser?.html_url"><a href="{{ selectedUser.html_url }}" target="_blank"><h3>{{ selectedUser.html_url }} </h3></a></div>
+            <hr>
+            <div *ngIf="selectedUser?.email">Email: {{ selectedUser.email }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.location">Location: {{ selectedUser.location }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.bio">Bio: {{ selectedUser.bio }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.updated_at">Last Seen: {{ selectedUser.updated_at | date }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.public_repos">Repos: {{ selectedUser.public_repos }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.public_gists">Gists: {{ selectedUser.public_gists }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.followers">Followers: {{ selectedUser.followers }}</div>
+            <hr>
+            <div *ngIf="selectedUser?.created_at">Joined github: {{ selectedUser.created_at | date }}</div>
+            <hr>
+            <button class="btn btn-sm btn-warning" (click)="selected = !selected;">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
