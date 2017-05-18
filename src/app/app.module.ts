@@ -4,20 +4,29 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { SearchUsersComponent } from './search-users/search-users.component';
-import { SearchUsersService } from './search-users.service';
+import { SearchUsersComponent } from './components/search-users/search-users.component';
+import { SearchUsersService } from './services/searchUserService/search-users.service';
+import { SearchArtistService } from './services/searchArtistService/search-artist.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
+import { HomeComponent } from './components/home/home.component';
+import { APP_ROUTING } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchUsersComponent
+    SearchUsersComponent,
+    NavbarComponent,
+    SpotifySearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    APP_ROUTING
   ],
   providers: [SearchUsersService],
-  bootstrap: [AppComponent, SearchUsersComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
