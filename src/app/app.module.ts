@@ -8,17 +8,17 @@ import { SearchUsersComponent } from './components/search-users/search-users.com
 import { SearchUsersService } from './services/searchUserService/search-users.service';
 import { SearchArtistService } from './services/searchArtistService/search-artist.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
 import { HomeComponent } from './components/home/home.component';
 import { APP_ROUTING } from './app.routes';
+import { SearchArtistComponent } from './components/search-artist/search-artist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchUsersComponent,
     NavbarComponent,
-    SpotifySearchComponent,
-    HomeComponent
+    HomeComponent,
+    SearchArtistComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +26,7 @@ import { APP_ROUTING } from './app.routes';
     HttpModule,
     APP_ROUTING
   ],
-  providers: [SearchUsersService],
+  providers: [SearchUsersService, SearchArtistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

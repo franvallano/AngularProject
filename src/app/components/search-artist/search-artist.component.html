@@ -4,9 +4,8 @@
 <div class="row">
   <div class="col-md-12 offset-md-3">
     <div class="form-inline">
-      <input class="form-control" type="text" placeholder="Location Name" name="place" [(ngModel)]="place" (keyup.enter)="search(place, language); place=''; language=''">
-      <input style="margin-left: 0.75em;" class="form-control" type="text" name="language" placeholder="Language e.g. Java" [(ngModel)]="language" (keyup.enter)="search(place, language); place=''; language=''">
-      <button style="margin-left: 0.75em;" (click)="search(place, language); place=''; language=''" type="button" class="btn btn-outline-primary">Search</button>
+      <input class="form-control" type="text" placeholder="Artists Name" [(ngModel)]="artist" (keyup.enter)="searchArtists(artist); artist=''">
+      <button style="margin-left: 0.75em;" (click)="searchArtists(artist); artist=''" type="button" class="btn btn-outline-primary">Search</button>
     </div>
   </div>
 </div>
@@ -17,17 +16,26 @@
     <strong>{{error_text}}</strong>
   </div>
   <div class="card-columns">
-    <div *ngFor="let user of results">
-      <div class="card col-md-12">
-        <img style="width: 20rem;" class="card-img-top" src="{{user.avatar_url}}" alt="Profile image">
-        <div class="card-block">
-          <div class="row">
-            <div class="col-md-6 offset-md-3">
-              <h4 class="card-title">{{user.login}}</h4><br>
-              <button class="btn btn-primary" data-toggle="modal" (click)="getDetails(user.login)" data-target=".bd-example-modal-lg">View Details</button>
-            </div>
-          </div>
-        </div>
+    <div class="card" *ngFor="let artista of results">
+      <div class="container" *ngIf="artista.images[0]">
+        <img [src]="artista.images[0].url" class="img-thumbnail">
+      </div>
+      <div class="card-block">
+        <h4>{{artista.name}}</h4>
+        <hr>
+        <b>Géneros:</b>
+        <span *ngFor="let genero of artista.genres; let i=index;">
+        <span *ngIf="i < artista.genres.length-1">{{genero}},&nbsp;</span>
+        <span *ngIf="i == artista.genres.length-1">{{genero}}</span>
+        </span>
+        <br/><br/>
+        <p class="card-text">
+          <b>Seguidores:</b> {{artista.followers.total}}
+        </p>
+        <hr>
+        <button type="button" class="btn btn-block btn-outline-primary">
+          <i class="fa fa-info-circle"></i>&nbsp;Info
+        </button>
       </div>
     </div>
   </div>
